@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FlouRouteImport } from './routes/flou'
+import { Route as TechnicienRouteImport } from './routes/technicien'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FlouRoute = FlouRouteImport.update({
+  id: '/flou',
+  path: '/flou',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnicienRoute = TechnicienRouteImport.update({
+  id: '/technicien',
+  path: '/technicien',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/flou': typeof FlouRoute
+  '/technicien': typeof TechnicienRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/flou': typeof FlouRoute
+  '/technicien': typeof TechnicienRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/flou': typeof FlouRoute
+  '/technicien': typeof TechnicienRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/flou' | '/technicien'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/flou' | '/technicien'
+  id: '__root__' | '/' | '/flou' | '/technicien'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FlouRoute: typeof FlouRoute
+  TechnicienRoute: typeof TechnicienRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/flou': {
+      id: '/flou'
+      path: '/flou'
+      fullPath: '/flou'
+      preLoaderRoute: typeof FlouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technicien': {
+      id: '/technicien'
+      path: '/technicien'
+      fullPath: '/technicien'
+      preLoaderRoute: typeof TechnicienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FlouRoute: FlouRoute,
+  TechnicienRoute: TechnicienRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -121,7 +121,24 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <nav className="sticky top-0 z-10 border-b bg-card/90 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl gap-1 px-4 py-3">
+          {[
+            { to: "/", label: "Atténuation" },
+            { to: "/technicien", label: "Technicien radio" },
+            { to: "/flou", label: "Flou géométrique" },
+          ].map((t) => (
+            <Link key={t.to} to={t.to} activeOptions={{ exact: true }}
+              className="rounded-lg px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary"
+              activeProps={{ className: "bg-primary text-primary-foreground hover:bg-primary" }}>
+              {t.label}
+            </Link>
+          ))}
+        </div>
+      </nav>
+      <main className="min-h-screen bg-background px-4 py-10">
+        <Outlet />
+      </main>
     </QueryClientProvider>
   );
 }
