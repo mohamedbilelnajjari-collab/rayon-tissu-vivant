@@ -30,8 +30,7 @@ function Index() {
   const m = mu(tissue, energy);
 
   return (
-    <main className="min-h-screen bg-background px-4 py-10">
-      <div className="mx-auto max-w-5xl space-y-8">
+    <div className="mx-auto max-w-5xl space-y-8">
         <header>
           <p className="text-sm font-medium uppercase tracking-widest text-primary">Physique médicale</p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground">Atténuation des rayons X</h1>
@@ -69,8 +68,7 @@ function Index() {
             </div>
           </section>
         </div>
-      </div>
-    </main>
+    </div>
   );
 }
 
